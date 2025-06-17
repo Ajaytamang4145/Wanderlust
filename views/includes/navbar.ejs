@@ -1,0 +1,176 @@
+<style>
+  .search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+  .search-btn:hover {
+    background-color: #fe424d;
+    color: #fff;
+  }
+  .search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+  }
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+  }
+  .custom-dropdown-menu {
+    width: auto;
+    min-width: 0;
+  }
+  .user-dropdown {
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-right: 50px;
+  }
+  .add-newplace {
+    margin-right: 20px;
+  }
+  .icon-logout {
+    display: inline;
+    margin-top: 0.5rem;
+  }
+
+  /* New styles for Explore button */
+  .nav-link.explore-btn {
+    position: relative;
+    font-weight: 600;
+    color: #fe424d;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .nav-link.explore-btn:hover,
+  .nav-link.explore-btn:focus {
+    background-color: #fe424d;
+    color: #fff;
+    text-decoration: none;
+    border-color: #fe424d;
+    box-shadow: 0 4px 8px rgba(254, 66, 77, 0.4);
+  }
+
+  /* Compass icon before Explore text */
+  .nav-link.explore-btn::before {
+    content: "\f14e"; /* FontAwesome compass icon unicode */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 0.5rem;
+    color: #fe424d;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link.explore-btn:hover::before,
+  .nav-link.explore-btn:focus::before {
+    color: #fff;
+  }
+
+@media (max-width: 767.98px) {
+  form[role="search"] {
+    display: none !important;
+  }
+}
+
+ @media (max-width: 767.98px) {
+    form[role="search"],
+    .add-newplace {
+      display: none !important;
+    }
+  }
+
+  .icon-logout > li > a {
+    display: inline-flex;
+    align-items: center;
+    background-color: #fe424d;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .icon-logout > li > a:hover,
+  .icon-logout > li > a:focus {
+    background-color: #d93a3f;
+    color: white;
+    text-decoration: none;
+  }
+
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <!-- Updated Explore link with new class -->
+    <a class="nav-link explore-btn" href="/listings">Explore</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <!-- This space left empty, Explore moved above -->
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2 search-inp"
+            type="search"
+            placeholder="Search destinations"
+          />
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </form>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link add-newplace" href="/listings/new">Add new place</a>
+        <% if (!currentUser) { %>
+        <li class="nav-item dropdown user-dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-regular fa-user"></i>
+          </a>
+          <ul class="dropdown-menu custom-dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="/signup"><b>Sign Up</b></a>
+            </li>
+            <hr />
+            <li>
+              <a class="dropdown-item" href="/login"><b>Login</b></a>
+            </li>
+          </ul>
+        </li>
+        <% } %>
+        <% if (currentUser) { %>
+        <div class="icon-logout">
+          <li>
+            <a class="dropdown-item" href="/logout"
+              ><i class="fa-solid fa-right-from-bracket"></i>&nbsp;<b
+                >Logout</b
+              ></a
+            >
+          </li>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
